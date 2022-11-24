@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<!-- <script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script> -->
+<link rel="stylesheet" href="./resources/js/simpleLightbox.min.css">
+<script src="./resources/js/simpleLightbox.min.js"></script>
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+
+	* {box-sizing: border-box;}
+
+	.img-magnifier-container {
+	position: relative;
+	}
+
+	.img-magnifier-glass {
+	position: absolute;
+	border: 3px solid #000;
+	border-radius: 50%;
+	cursor: none;
+	/*Set the size of the magnifier glass:*/
+	width: 300px;
+	height: 300px;
+	}
+</style>
+
+<html>
+<head>
+	<title>RoentGen: Vision-Language Foundation Model for Chest X-ray Generation</title>
+	<meta property="og:image" content="./resources/splash.jpg"/>
+	<meta property="og:title" content="RoentGen: Vision-Language Foundation Model for Chest X-ray Generation." />
+	<meta property="og:description" content="Fine-tuning Stable Diffusion for fine-grain control of CXR generation." />
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-SM533FK505');
+	</script>
+	<script>
+		/* https://github.com/dbrekalo/simpleLightbox */
+		function createLigthboxGallery() {
+			new SimpleLightbox({elements: '.ImageGallery a'})
+		}
+	</script>
+</head>
+
+<body onload="createLigthboxGallery();">
+	<br>
+	<center>
+		<span style="font-size:36px">
+			RoentGen: Vision-Language Foundation Model<br />for Chest X-ray Generation
+		</span>
+		</br></br>
+		
+		<table align=center width=600px>
+			<table align=center width=600px>				
+				<tr style="font-size: 14px">
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://www.linkedin.com/in/pierre-chambon/">Pierre<br />Chambon<sup>[1]*</sup></a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<span><a href="https://www.linkedin.com/in/bluethgen/">Christian Bluethgen<sup>[1]*</sup></a></span>
+					</td>
+					<td align=center><center> Jean-Benoit Delbrouck<sup>[1]</sup></center></td>
+					<td align=center>Juan M.Z. Chaves<sup>[1]</sup></td> 
+					<td align=center>Rogier Van der Sluijs<sup>[1]</sup></td>
+				</tr>
+				<tr style="font-size: 14px">
+					<td align=center>Małgorzata Połacin<sup>[2]</sup></td>
+					<td align=center>Tanishq Mathew Abraham<sup>[3,4]</sup></td> 
+					<td align=center>Shivanshu Purohit<sup>[4]</sup></td> 
+					<td align=center width=120px>
+						<center>
+							<span><a href="https://profiles.stanford.edu/curtis-langlotz">Curtis P.<br/>Langlotz<sup>[1,2]</sup></a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span><a href="https://profiles.stanford.edu/akshay-chaudhari">Akshay<br />Chaudhari<sup>[1,2]</sup></a></span>
+						</center>
+					</td>
+				</tr>
+			</table>
+		<p style="font-size: 14px">
+		<span style="text-align: center;"><sup>[1]</sup> Center for Artificial Intelligence in Medicine and Imaging (AIMI), Stanford University</span>
+		</br>
+		<span style="text-align: center;"><sup>[2]</sup> Stanford Medicine, Department of Radiology, Stanford University</span>
+		</br>
+		<span style="text-align: center;"><sup>[3]</sup> University of California, Davis</span>
+		</br>
+		<span style="text-align: center;"><sup>[4]</sup> Stability AI</span>
+		</br><span style="text-align: center;"><sup>*</sup> equal contributions</span>
+		</br></p>
+		</br></br></br>
+		<table align=center width=850px>
+			<tr>
+				<td width=260px>
+					<center>
+						<img class="round" style="width:700px; border: 0px;" src="./resources/schematic_teaser.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<br>
+			<table align=center width=250px>
+				<tr>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='https://arxiv.org/abs/2211.12737'>[Paper]</a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='./resources/bibtex.txt'>[BibTeX]</a></span><br>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='#' style="color:gray">[GitHub]</a></span><br>
+						</center>
+					</td>
+				</tr>
+			</table>
+		</table>
+	</center>
+
+	<center>
+
+		<table align=center width=850px>
+			<tr>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+	</center>
+
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			<td style='text-align: justify;'>
+				<p>Multimodal models trained on large natural image-text pair datasets have exhibited astounding abilities in generating high-quality images. Medical imaging data is fundamentally different to natural images, and the language used to succinctly capture relevant details in medical data uses a different, narrow but semantically rich, domain-specific vocabulary. Not surprisingly, multi-modal models trained on natural image-text pairs do not tend to generalize well to the medical domain. Developing generative imaging models faithfully representing medical concepts while providing compositional diversity could mitigate the existing paucity of high-quality, annotated medical imaging datasets.</p>
+				<p>In this work, we develop a strategy to overcome the large natural-medical distributional shift by adapting a pre-trained latent diffusion model on a corpus of publicly available chest x-rays (CXR) and their corresponding radiology (text) reports. We investigate the model's ability to generate high-fidelity, diverse synthetic CXR conditioned on text prompts. We assess the model outputs quantitatively using image quality metrics, and evaluate image quality and text-image alignment by human domain experts.</p>
+				<p>RoentGen is able to create visually convincing, diverse synthetic CXR images. The output can be controlled to a high extent by using free-form text prompts including radiology-specific language. Fine-tuning this model on a fixed training set and using it as a data augmentation method, we measure a 5% improvement of a classifier trained jointly on synthetic and real images, and a 3% improvement when trained on a larger but purely synthetic training set. Finally, we observe that this fine-tuning distills in-domain knowledge in the text-encoder and can improve its representation capabilities of certain diseases like pneumothorax by 25%. </p>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr>
+
+	<!-- <center><h1>Code</h1></center>
+
+	<table align=center width=420px>
+		<center>
+			<tr>
+				<td>
+				</td>
+			</tr>
+		</center>
+	</table> -->
+
+	<br>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px >
+				<center >
+					<td class="img-magnifier-container"><img id="myimage" style="width:800px" src="./resources/findings.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<table align=center width=800px>
+		<tr>
+			<td align=center width=800px>
+				<center>Synthetic images created by prompting RoentGen for typical CXR
+			abnormalities. The generated CXRs feature high levels of detail: When prompted for ”edema” (top right), perihilar haziness (white arrowheads) and peribronchial cuffing (black arrowhead), both features seen in pulmonary edema, can be observed. For "pneumothorax" (bottom
+			row, third image from the left), a fine line representing the visceral pleural lining of the partially collapsed lung can be delineated (dashed
+			line).</center>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px >
+				<center >
+					<td class="img-magnifier-container"><img id="myimage" style="width:800px" src="./resources/size_laterality_pleural_effusion.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+	<table align=center width=800px>
+		<tr>
+			<td align=center width=800px>
+				<center>Text-conditioned synthesis of CXR. Each image was hand-picked out of four generated CXR per respective prompt. Here,
+					presence or absence of a finding (pleural effusions, dotted ROI added for visualization) and dimensions like size and laterality were
+					controlled via prompting. Note that the model correctly incorporated the radiological convention of displaying the right patient side on the
+					left side of the image, and vice versa.</center>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<!-- <div class="ImageGallery">
+	<table align=center width=850px>
+		<center><h1>Gallery of Examples</h1></center>
+			<tr>
+				<td><a href="./resources/gallery/no.1.jpg"><img width='150px' src="./resources/gallery/no.1.jpg" alt="a photo of a lung xray" name="jpg1"></a></td>
+				<td><a href="./resources/gallery/no.2.jpg"><img width='150px' src="./resources/gallery/no.2.jpg" alt="a photo of a lung xray" name="jpg2"></a></td>
+				<td><a href="./resources/gallery/no.3.jpg"><img width='150px' src="./resources/gallery/no.3.jpg" alt="a photo of a lung xray" name="jpg3"></a></td>
+				<td><a href="./resources/gallery/no.4.jpg"><img width='150px' src="./resources/gallery/no.4.jpg" alt="a photo of a lung xray" name="jpg4"></a></td>
+				<td><a href="./resources/gallery/no.5.jpg"><img width='150px' src="./resources/gallery/no.5.jpg" alt="a photo of a lung xray" name="jpg5"></a></td>
+			</tr>
+			<tr>
+				<td><a href="./resources/gallery/no.6.jpg"><img width='150px' src="./resources/gallery/no.6.jpg" alt="a photo of a lung xray" name="jpg6"></a></td>
+				<td><a href="./resources/gallery/no.7.jpg"><img width='150px' src="./resources/gallery/no.7.jpg" alt="a photo of a lung xray" name="jpg7"></a></td>
+				<td><a href="./resources/gallery/no.8.jpg"><img width='150px' src="./resources/gallery/no.8.jpg" alt="a photo of a lung xray" name="jpg8"></a></td>
+				<td><a href="./resources/gallery/no.9.jpg"><img width='150px' src="./resources/gallery/no.9.jpg" alt="a photo of a lung xray" name="jpg9"></a></td>
+				<td><a href="./resources/gallery/no.10.jpg"><img width='150px' src="./resources/gallery/no.10.jpg" alt="a photo of a lung xray" name="jpg10"></a></td>
+			</tr>
+			<tr>
+				<td><a href="./resources/gallery/pe.1.jpg"><img width='150px' src="./resources/gallery/pe.1.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg101"></a></td>
+				<td><a href="./resources/gallery/pe.2.jpg"><img width='150px' src="./resources/gallery/pe.2.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg102"></a></td>
+				<td><a href="./resources/gallery/pe.3.jpg"><img width='150px' src="./resources/gallery/pe.3.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg103"></a></td>
+				<td><a href="./resources/gallery/pe.4.jpg"><img width='150px' src="./resources/gallery/pe.4.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg104"></a></td>
+				<td><a href="./resources/gallery/pe.5.jpg"><img width='150px' src="./resources/gallery/pe.5.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg105"></a></td>
+			</tr>
+			<tr>
+				<td><a href="./resources/gallery/pe.6.jpg"><img width='150px' src="./resources/gallery/pe.6.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg106"></a></td>
+				<td><a href="./resources/gallery/pe.7.jpg"><img width='150px' src="./resources/gallery/pe.7.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg107"></a></td>
+				<td><a href="./resources/gallery/pe.8.jpg"><img width='150px' src="./resources/gallery/pe.8.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg108"></a></td>
+				<td><a href="./resources/gallery/pe.9.jpg"><img width='150px' src="./resources/gallery/pe.9.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg109"></a></td>
+				<td><a href="./resources/gallery/pe.10.jpg"><img width='150px' src="./resources/gallery/pe.10.jpg" alt="a photo of a lung xray with visible pleural effusion" name="jpg110"></a></td>
+			</tr>
+	</table>
+	</div> -->
+	<!-- <table align=center width=800px>
+		<br>
+		<tr><center>
+			<span style="font-size:28px">&nbsp;<a href='#'>[GitHub]</a>
+			</center>
+		</span>
+	</table> -->
+	<br>
+	<hr>
+	<table align=center width=550px>
+		<center><h1>Paper</h1></center>
+		<tr>
+			<td><a href="https://arxiv.org/abs/2211.12737"><img class="layered-paper-big" style="height:175px" src="./resources/arxiv_thumb_roentgen.png"/></a></td>
+			<td><span style="font-size:14pt">P. Chambon, C. Bluethgen,<br />JB Delbrouck, R. Van der Sluijs,<br />M. Polacin, J.M.Z. Chaves,<br />T. Abraham, and S. Purohit<br />CP. Langlotz, A. Chaudhari<br>
+				<b>RoentGen: Vision-Language Foundation Model for Chest X-ray Generation</b><br>
+				2022. (hosted on <a href="https://arxiv.org/abs/2211.12737">ArXiv</a>)<br>
+				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
+				<span style="font-size:4pt"><a href=""><br></a>
+				</span>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<table align=center width=600px>
+		<tr>
+			<td><span style="font-size:14pt"><center><a href="./resources/bibtex.txt">[Bibtex]</a></center></td>
+		</tr>
+	</table>
+
+	<hr>
+	<br>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<center><h1>Acknowledgements</h1></center>
+					<p style="text-align: justify;">Research reported in this publication was made possible in part by the National Institute of Biomedical Imaging and Bioengineering (NIBIB) of the National Institutes of Health, which funded PC under contracts 75N92020C00008 and 75N92020C00021. CB received support from the Swiss Society of Radiology and the Kurt and Senta Herrmann-Foundation, independent of this work. We acknowledge
+						support by Stability.AI in providing computational support for this work. We acknowledge the support of this work by the Wu Tsai Human Performance Alliance at Stanford University and the Joe and Clara Tsai Foundation.</p>
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+<hr>
+
+<table align=center width=900px >
+	<center><h2 style="color: rgb(200, 200, 200)">Disclaimer</h2></center>
+	<tr>
+		<td style='text-align: justify;color: rgb(200, 200, 200)'>
+			<p >The information provided on this project site, including the generated images, does not contain or is substitute for any professional medical or health advice. The information is provided in good faith for general informational, research and educational purposes only. The authors make no warranty of any kind, express or implied, regarding the accuracy, validity, reliability, or completeness of any information on the site. Before taking any actions based on the presented information, we encourage you to consult with appropriate medical professionals. THE USE OR RELIANCE OF ANY INFORMATION CONTAINED ON THE SITE IS SOLELY AT YOUR OWN RISK.</p>
+		</td>
+	</tr>
+</table>
+<hr>
+<center><span style="font-size: 10px; text-align: center;">This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.<br>Code used for the image gallery: <a href="https://github.com/dbrekalo/simpleLightbox">SimpleLightbox</a></span></center>
+<br />
+</body>
+</html>
+
