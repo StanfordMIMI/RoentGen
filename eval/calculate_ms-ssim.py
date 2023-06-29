@@ -105,6 +105,6 @@ if __name__ == "__main__":
     )
 
     # Save results
-    fname = f"{args.output_folder}/ms-ssim_results_{Path(args.input_folder).basename}_n={len(results)}.csv"
+    fname = f"{args.output_folder}/ms-ssim_results_{Path(args.input_folder).name}_n={len(results)}.csv"
     results.to_csv(fname, index=False)
     print(f"Saved results to {fname}")
