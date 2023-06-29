@@ -90,7 +90,7 @@ def calc_intraprompt_diversity(
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_folder", type=str, required=True, help="Path to folder containing images")
+    parser.add_argument("input_folder", type=str, help="Path to folder containing images")
     parser.add_argument("--n_images", type=int, default=2000, help="Number of images to process")
     parser.add_argument("--n_repetitions", type=int, default=4, help="Number of repetitions per image")
     parser.add_argument("--search_pattern", type=str, default="*_0.jpg", help="Search pattern for glob")
