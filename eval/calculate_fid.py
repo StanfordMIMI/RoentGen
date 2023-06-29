@@ -7,9 +7,7 @@ import pandas as pd
 from cleanfid import fid
 
 import torch
-from torch.utils.data import Dataset
 
-from accelerate import Accelerator
 from accelerate.utils import set_seed
 
 import logging
@@ -19,8 +17,6 @@ from tqdm import tqdm
 from pprint import pprint
 
 import numpy as np
-
-accelerate = Accelerator()
 
 # Logging
 logger = logging.getLogger(__name__)
