@@ -16,6 +16,9 @@
 # Script based on the VilMedic library by JB. Delbrouck
 # https://github.com/jbdel/vilmedic
 
+# requires packages radgraph, f1chexbert, bert_score
+# available form pypi.org, through 'pip install radgraph f1chexbert bert_score'
+
 import argparse
 
 import os
