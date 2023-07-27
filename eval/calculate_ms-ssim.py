@@ -50,8 +50,10 @@ def calc_intraprompt_diversity(
         print(f"Processing {n_images} in folder {input_folder}...")
     
     # Create comparisons
-    comparisons = combinations(range(n_repetitions), 2) # [(0, 1), (0, 2)...]
-    x_imgs, y_imgs = list(zip(*list(comparisons))) # [(0, 0, 0, 1, 1, 2), (1, 2, 3, 2, 3, 3)]
+    comparisons = list(combinations(range(n_repetitions), 2)) # [(0, 1), (0, 2)...]
+    x_imgs, y_imgs = list(zip(*comparisons)) # [(0, 0, 0, 1, 1, 2), (1, 2, 3, 2, 3, 3)]
+
+    print(f"Comparisons to run ({len(comparisons)}): {comparisons}")
 
     # Create transform
     TT = ToTensor() # Auto-scales to [0.0,1.0] if input is outside that range
@@ -80,6 +82,7 @@ def calc_intraprompt_diversity(
             *ms_ssim(X, Y, data_range=1.0, size_average=False).tolist()
         ])
 
+
     # Put results into a pandas data frame
     results = pd.DataFrame(results, columns=[
                                     "dicom_id",
@@ -95,6 +98,7 @@ if __name__ == "__main__":
     parser.add_argument("--n_repetitions", type=int, default=4, help="Number of repetitions per image")
     parser.add_argument("--search_pattern", type=str, default="*_0.jpg", help="Search pattern for glob")
     parser.add_argument("--output_folder", type=str, default=".", help="Path to output folder")
+    # parser.add_argument("--suppress_progress_bar", action="store_true", default=False)
     args = parser.parse_args()
 
     results = calc_intraprompt_diversity(
