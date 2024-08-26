@@ -1,12 +1,20 @@
-@misc{chambon2022roentgen,
-  doi = {10.48550/ARXIV.2211.12737},
-  url = {https://arxiv.org/abs/2211.12737},
-  author = {Chambon, Pierre and Bluethgen, Christian and Delbrouck, Jean-Benoit and Van der Sluijs, Rogier and Połacin, Małgorzata and Chaves, Juan Manuel Zambrano and Abraham, Tanishq Mathew and Purohit, Shivanshu and Langlotz, Curtis P. and Chaudhari, Akshay},
-  keywords = {Computer Vision and Pattern Recognition (cs.CV), Artificial Intelligence (cs.AI), Computation and Language (cs.CL), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title = {RoentGen: Vision-Language Foundation Model for Chest X-ray Generation},
-  publisher = {arXiv},
-  year = {2022},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV},
-  copyright = {arXiv.org perpetual, non-exclusive license}
+﻿@Article{Bluethgen2024,
+author={Bluethgen, Christian
+and Chambon, Pierre
+and Delbrouck, Jean-Benoit
+and van der Sluijs, Rogier
+and Po{\l}acin, Ma{\l}gorzata
+and Zambrano Chaves, Juan Manuel
+and Abraham, Tanishq Mathew
+and Purohit, Shivanshu
+and Langlotz, Curtis P.
+and Chaudhari, Akshay S.},
+title={A vision--language foundation model for the generation of realistic chest X-ray images},
+journal={Nature Biomedical Engineering},
+year={2024},
+month={Aug},
+day={26},
+issn={2157-846X},
+doi={10.1038/s41551-024-01246-y},
+url={https://doi.org/10.1038/s41551-024-01246-y}
 }
